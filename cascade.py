@@ -1,7 +1,8 @@
 #######################################################################################################
 # indica o caminho dos móculos locais
 import sys           
-sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
+#sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
+sys.path.insert(0, "/home/iquanta/Micael/python_modules")
 
 #######################################################################################################
 
