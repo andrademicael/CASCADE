@@ -8,7 +8,7 @@ sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algorit
 #       													                                          #
 #									Módulos importados	        				                      #
 #                                   													              #
-from numpy import arange, where, zeros
+from numpy import arange, log10, where, zeros
 from numpy.random import shuffle
 from scipy.stats import norm
 # from commpy import bsc
@@ -30,17 +30,21 @@ from cascadef import *
 	A partir disto, são geradas expansões em base 2, dado um numero fixo de bits para representação
 	dos valores das CDF's
 '''
-n_r = 60 # quantidade de realizações
+n_r = 100 # quantidade de realizações
 media = 0 # média das VAG's
-ro = 0.96 # coeficiente de correlação
+ro = float(input('coeficiente de correlação: '))
 sigma = 1 # variância
-k = int(0.73/(1-ro)) # First iteration block size
-A, B = cor_var(n_r, media, ro, sigma) # gera as duas VA's Gaussianas correlacionadas
+
+A, B, var_a, var_b, var_n = cor_var(n_r, media, ro, sigma) # gera as duas VA's Gaussianas correlacionadas
+k = int(0.73/var_n) # First iteration block size
+
+snr = 10*log10(var_a/var_n)
 
 cdfa = norm.cdf(A) # valor da CDF para cada valor de A
 cdfb = norm.cdf(B) # valor da CDF para cada valor de B
 
-nbits = 4 #quantidade de bits da representação
+nbits = int(input('quantidade de bits da representação: '))	
+
 s_a = zeros((n_r, nbits), dtype = int)
 s_b = zeros((n_r, nbits), dtype = int)
 for i in range(n_r):
@@ -51,12 +55,14 @@ a = s_a.reshape((1,s_a.size))[0]
 b = s_b.reshape((1,s_b.size))[0]
 l = a.size # String size
 
-print('Início da CASCADE. \nParâmetros da simulação: ')
-print('realizações: %i ' % n_r)
-print('Média e coeficiente de correlação das VA\'s: %2f, %2f' % (media, ro))
+print('\nInício da CASCADE. \nParâmetros da simulação: ')
+print('\nRealizações: %i ' % n_r)
+print('Média e coeficiente de correlação das VA\'s: %.2f, %.2f' % (media, ro))
 print('Número de bits para representação: %i' % nbits)
 print('Comprimento total das strings: %i' % l)
 print('Quantidade de erros gerados: %i ' % where(a != b)[0].size)
+print('Variância do ruído: %.2f' % var_n)
+print('SRN: %.2f' % snr)
 print('Tamanho to bloco: %i' % k)
 
 ######################################################################################################
