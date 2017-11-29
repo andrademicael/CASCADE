@@ -1,5 +1,5 @@
 #######################################################################################################
-# indica o caminho dos móculos locais
+# indica o caminho dos módulos locais
 import sys           
 # sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
 sys.path.insert(0, "/home/iquanta/Micael/python_modules")
@@ -19,7 +19,7 @@ from cascadef import *
 	# Deve ser executado antes de qualquer plotagem
 '''
 
-a, b, k, snr = strings(0.96, 2, 1000)
+a, b, k, snr = strings(0.96, 3, 200000)
 
 # Permutation pattern generation
 sig = arange(a.size) 
