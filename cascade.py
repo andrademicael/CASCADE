@@ -1,8 +1,8 @@
 #######################################################################################################
 # indica o caminho dos módulos locais
 import sys           
-# sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
-sys.path.insert(0, "/home/iquanta/Micael/python_modules")
+sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
+# sys.path.insert(0, "/home/iquanta/Micael/python_modules")
 
 #######################################################################################################
 #       													                                          #
@@ -19,11 +19,12 @@ from cascadef import *
 	# Deve ser executado antes de qualquer plotagem
 '''
 
-a, b, k, snr = strings(0.96, 3, 200000)
+a, b, k, snr = strings(0.96, 3, 2000)
 
 # Permutation pattern generation
 sig = arange(a.size) 
 shuffle(sig) # permutation pattern
 
-a, b = cascade(a, b, sig, k)
+a, br = cascade(a, b, sig, k) 
+a, br2 = cascade(a, b, sig, k, recur = True) # para utilização de recursividade
 
