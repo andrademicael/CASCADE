@@ -8,7 +8,7 @@ sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algorit
 #       													                                          #
 #									Módulos importados	        				                      #
 #                                   													              #
-from numpy import arange
+from numpy import arange, sqrt, zeros
 from numpy.random import shuffle
 
 from cascadef import * 
@@ -18,13 +18,19 @@ from cascadef import *
 	ctp.first_run() # seta variáveis e habilita a exportação do codigo latex. 
 	# Deve ser executado antes de qualquer plotagem
 '''
+snr = 3
+ro = sqrt(snr/(snr+1))
 
-a, b, k, snr = strings(0.96, 3, 2000)
+ro = 0.9
+err = zeros((1,1000), dtype = int)[0]
+for i in range(1000):
+	a, b, err[i], k = strings(ro, 3, 1000)
+
 
 # Permutation pattern generation
 sig = arange(a.size) 
 shuffle(sig) # permutation pattern
 
-a, br = cascade(a, b, sig, k) 
-a, br2 = cascade(a, b, sig, k, recur = True) # para utilização de recursividade
+ar, br = cascade(a, b, sig, k) 
+ar2, br2 = cascade(a, b, sig, k, recur = True) # para utilização de recursividade
 
