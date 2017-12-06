@@ -18,13 +18,8 @@ from cascadef import *
 	ctp.first_run() # seta variáveis e habilita a exportação do codigo latex. 
 	# Deve ser executado antes de qualquer plotagem
 '''
-snr = 3
-ro = sqrt(snr/(snr+1))
 
-ro = 0.9
-err = zeros((1,1000), dtype = int)[0]
-for i in range(1000):
-	a, b, err[i], k = strings(ro, 3, 1000)
+a, b, err, k = strings(snr, 3, 1000)
 
 
 # Permutation pattern generation

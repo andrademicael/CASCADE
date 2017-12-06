@@ -1,31 +1,30 @@
 import sys           
 sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
-from numpy import zeros
+from numpy import zeros, arange
 from cascadef import strings
 import customplot as ctp 
 ctp.first_run()
 import matplotlib.pyplot as plt
 
-nb = 6
-snr = 10
-sume = 0
-n_r = 100
-p_e = zeros((snr+1,nb))
+ordem = 6 # ordem da expansão
+snr = arange(11) # valor máximo da snr
+n_re = 1000 # número de realizações das VA's
+n_r = 20 # numero de repetições do experimento
+m_e = zeros((snr.size,ordem))
 
-for j in range(1, nb+1):
-	for i in range(snr+1):
-		sume = 0
-		for t in range(n_r):
-			a, b, err, k = strings(i, j, 1000, display = False)
-			sume += err/n_r
-		p_e[i,j-1] = sume/(1000*j)
+for i in snr:
+	sume = zeros((1,ordem))[0]
+	for t in range(n_r):
+		a, b, err = strings(i, ordem, n_re, display = True)
+		sume += err/n_r # calcula a média de erros e cada repetição do experimento
+	m_e[i,:] = sume/n_re # calcula a porcentagem de erros gerada para cada valor de SNR em cada canal
 
 fig = ctp.newfig(0.8)
-for k in range(nb):
-	plt.plot(range(snr+1), p_e[:,k], label = 'nb = %i' % (k+1))
+for k in range(ordem):
+	plt.plot(snr, m_e[:,k], label = 'Canal %i' % (k+1))
 
 plt.xlabel(r'SNR')
-plt.ylabel(r'Número médio de erros')
-plt.title('Número médio de erros para nb = {1, 2, 3, 4, 5, 6}')
+plt.ylabel(r'Porcentagem de bits errados')
+plt.title('Porcentagem de erros gerados por canal')
 plt.legend(loc='upper right')
-ctp.savefig('erro_medio')
+ctp.savefig('erro')
