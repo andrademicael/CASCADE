@@ -1,5 +1,6 @@
 import sys           
-sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
+# sys.path.insert(0, "/home/micael/Dropbox/MESTRADO/Mestrado-Micael-2017-1/Algoritmos/python_modules")
+sys.path.insert(0, "/home/iquanta/Micael/python_modules")
 from numpy import zeros, arange
 from cascadef import strings
 import customplot as ctp 
@@ -9,7 +10,7 @@ import matplotlib.pyplot as plt
 ordem = 6 # ordem da expansão
 snr = arange(11) # valor máximo da snr
 n_re = 1000 # número de realizações das VA's
-n_r = 20 # numero de repetições do experimento
+n_r = 10000 # numero de repetições do experimento
 m_e = zeros((snr.size,ordem))
 
 for i in snr:
@@ -26,5 +27,5 @@ for k in range(ordem):
 plt.xlabel(r'SNR')
 plt.ylabel(r'Porcentagem de bits errados')
 plt.title('Porcentagem de erros gerados por canal')
-plt.legend(loc='upper right')
+plt.legend(loc='lower left')
 ctp.savefig('erro')
